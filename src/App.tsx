@@ -83,12 +83,6 @@ const emptyAnimal: Animal = {
   estimatedDOB: '',
   ageAtAdmission: 0,
   sex: '',
-  // Don't initialize these optional fields:
-  // microchipNumber: '',
-  // placement: '',
-  // otherDetails: '',
-  // callDetails: '',
-  // otherRescueDetails: '',
   incomeReason: '',
   when: '',
   where: '',
@@ -132,8 +126,6 @@ export default function AnimalManager() {
       captureNeeded: false,
       whoBrought: '',
       whoCalled: '',
-      callDetails: '',
-      otherRescueDetails: '',
       arrivalWeight: 8,
       hadTreatment: true,
       isUnderVigilance: false,
@@ -164,8 +156,6 @@ export default function AnimalManager() {
       captureNeeded: false,
       whoBrought: '',
       whoCalled: '',
-      callDetails: '',
-      otherRescueDetails: '',
       arrivalWeight: 3,
       hadTreatment: true,
       isUnderVigilance: false,
@@ -528,7 +518,7 @@ export default function AnimalManager() {
                       </label>
                       <textarea
                           placeholder="Any additional details about the animal..."
-                          value={formData.otherDetails}
+                          value={formData.otherDetails || ""}
                           onChange={(e) => setFormData({...formData, otherDetails: e.target.value})}
                           rows={3}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
