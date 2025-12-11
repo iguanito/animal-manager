@@ -18,7 +18,7 @@ interface Animal {
   incomeReason: string;
   when: string;
   where: string;
-  kmFromTheCenter: string;
+  kmFromTheCenter?: number;
   latitude: number;
   longitude: number;
   captureNeeded: boolean;
@@ -86,7 +86,6 @@ const emptyAnimal: Animal = {
   incomeReason: '',
   when: '',
   where: '',
-  kmFromTheCenter: '',
   latitude: 0,
   longitude: 0,
   captureNeeded: false,
@@ -104,7 +103,7 @@ const emptyAnimal: Animal = {
 
 export default function AnimalManager() {
 
-  const [animals, setAnimals] = useState([
+  const [animals, setAnimals] = useState<Animal[]>([
     {
       id: 1,
       givenName: 'Buddy',
@@ -215,11 +214,11 @@ export default function AnimalManager() {
 
     if (editId) {
       setAnimals(animals.map(a =>
-          a.id === editId ? { ...formData, id: editId } satisfies Animal : a
+          a.id === editId ? { ...formData, id: editId } : a
       ));
       setEditId(null);
     } else {
-      setAnimals([...animals, { ...formData, id: Date.now() } satisfies Animal]);
+      setAnimals([...animals, { ...formData, id: Date.now() } ]);
     }
 
     setFormData(emptyAnimal);
