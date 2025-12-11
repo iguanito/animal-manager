@@ -461,7 +461,7 @@ export default function AnimalManager() {
                             step="0.1"
                             placeholder="e.g., 2.5"
                             value={formData.ageAtAdmission}
-                          onChange={(e) => setFormData({...formData, ageAtAdmission: +e.target.value})}
+                          onChange={(e) => setFormData({...formData, ageAtAdmission: parseInt(e.target.value)})}
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
                         />
                       </div>
@@ -531,7 +531,23 @@ export default function AnimalManager() {
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        When Filed *
+                        Income Reason(s) *
+                      </label>
+                      <textarea
+                          placeholder="Describe the reason for intake (e.g., Orphaned, Injured, Abandoned, Transfer from another facility, Confiscated, etc.)"
+                          value={formData.incomeReason}
+                          onChange={(e) => setFormData({...formData, incomeReason: e.target.value})}
+                          rows={4}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                      />
+                      <p className="text-sm text-gray-500 mt-2">
+                        Please provide details about how and why this animal came into your care
+                      </p>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        When *
                       </label>
                       <input
                           type="date"
@@ -541,20 +557,130 @@ export default function AnimalManager() {
                       />
                     </div>
 
+
+
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Income Reason *
+                        Where
                       </label>
-                      <textarea
-                          placeholder="Describe the reason for intake (e.g., Orphaned, Injured, Abandoned, Transfer from another facility, Confiscated, etc.)"
-                          value={formData.incomeReason}
-                          onChange={(e) => setFormData({...formData, incomeReason: e.target.value})}
-                          rows={6}
+                      <input
+                          type="text"
+                          placeholder="e.g., Forest near Highway 101, Beach area, Urban neighborhood"
+                          value={formData.where}
+                          onChange={(e) => setFormData({...formData, where: e.target.value})}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
                       />
-                      <p className="text-sm text-gray-500 mt-2">
-                        Please provide details about how and why this animal came into your care
-                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          Km(s) from the Center
+                        </label>
+                        <input
+                            type="number"
+                            step="0.1"
+                            placeholder="e.g., 15.5"
+                            value={formData.kmFromTheCenter || ''}
+                            onChange={(e) => setFormData({...formData, kmFromTheCenter: parseInt(e.target.value)})}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          Latitude
+                        </label>
+                        <input
+                            type="number"
+                            step="0.000001"
+                            placeholder="e.g., 47.6062"
+                            value={formData.latitude || ''}
+                            onChange={(e) => setFormData({...formData, latitude: +e.target.value})}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          Longitude
+                        </label>
+                        <input
+                            type="number"
+                            step="0.000001"
+                            placeholder="e.g., -122.3321"
+                            value={formData.longitude || ''}
+                            onChange={(e) => setFormData({...formData, longitude: +e.target.value})}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
+                      <input
+                          type="checkbox"
+                          id="captureNeeded"
+                          checked={formData.captureNeeded}
+                          onChange={(e) => setFormData({...formData, captureNeeded: e.target.checked})}
+                          className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+                      />
+                      <label htmlFor="captureNeeded" className="text-sm font-semibold text-gray-700 cursor-pointer">
+                        Capture Needed
+                      </label>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          Who Brought the Animal
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="e.g., John Smith, Park Ranger, Good Samaritan"
+                            value={formData.whoBrought}
+                            onChange={(e) => setFormData({...formData, whoBrought: e.target.value})}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          Who Called
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="e.g., Jane Doe, Wildlife Officer"
+                            value={formData.whoCalled}
+                            onChange={(e) => setFormData({...formData, whoCalled: e.target.value})}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Call Details
+                      </label>
+                      <textarea
+                          placeholder="Details about the call (e.g., time of call, caller's observations, urgency level)"
+                          value={formData.callDetails || ''}
+                          onChange={(e) => setFormData({...formData, callDetails: e.target.value})}
+                          rows={3}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Other Rescue Details
+                      </label>
+                      <textarea
+                          placeholder="Any additional information about the rescue (e.g., weather conditions, rescue team members, equipment used)"
+                          value={formData.otherRescueDetails || ''}
+                          onChange={(e) => setFormData({...formData, otherRescueDetails: e.target.value})}
+                          rows={3}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                      />
                     </div>
                   </div>
               )}
